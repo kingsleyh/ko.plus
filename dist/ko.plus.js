@@ -1,28 +1,13 @@
 /*=============================================================================
- *   Author:      Steve Greatrex - @stevegreatrex                               
- *                                                                              
- *   Description: Awesome extensions for KnockoutJs                              
+ *   Author:      Steve Greatrex - @stevegreatrex
+ *
+ *   Description: Awesome extensions for KnockoutJs
+ *   
+ *   Modified to work with Durandal.js
  *=============================================================================*/
-
-(function (window, undefined) {
-    "use strict";
-    (function (factory) {
-        if (typeof define === "function" && define.amd) { // AMD
-            define("ko.plus", ["jquery", "knockout"], factory);
-        }
-        else {
-            factory(window.jQuery, window.ko);
-        }
-    }(function ($, ko) {
-	"use strict";;/*global jQuery:false, ko:false*/
-
-/**
-* Creates a new instance of ko.command
-*
-* @constructor
-* @param  options The options object for the command or a commmand function
-* @return A new instance of ko.command
-*/
+(function (factory) {
+		define(["knockout", "jquery","exports"], factory);
+}(function (ko,$,undefined) {
 ko.command = function (options) {
 	//allow just a function to be passed in
 	if (typeof options === "function") { options = { action: options }; }
@@ -157,7 +142,7 @@ ko.bindingHandlers.command = {
 		ko.bindingHandlers.enable.update.call(this, element, command.canExecute, allBindingsAccessor);
 	}
 };
-    
+
 //factory method to create a $.Deferred that is already completed
 function instantDeferred(resolve, returnValue, context) {
 	var deferred = $.Deferred();
@@ -300,7 +285,7 @@ ko.editable.makeEditable = function (target) {
 /**
 * loadingWhen replaces the content of a container with a loading spinner
 * when the bound value is truthy.
-* Styling requires the .loader class to be defined for the page as well as the loaderClass property 
+* Styling requires the .loader class to be defined for the page as well as the loaderClass property
 * (or a default of .loader-dark)
 */
 ko.bindingHandlers.loadingWhen = {
@@ -318,7 +303,7 @@ ko.bindingHandlers.loadingWhen = {
             $element.css("position", "relative");
         }
 
-           
+
     },
     update: function (element, valueAccessor) {
         var isLoading = ko.unwrap(valueAccessor()),
@@ -336,4 +321,3 @@ ko.bindingHandlers.loadingWhen = {
         }
     }
 };;}));
-}(window));
